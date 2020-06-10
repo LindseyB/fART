@@ -3,12 +3,15 @@
 
 @import "{{ site.theme }}";
 
-
-#header-image {
-  margin: auto;
-  display: block;
-}
-
 .page-header {
   background-image: linear-gradient(120deg, #155799, #1599576e), url('https://i.imgur.com/5Ww5Nmw.gif') !important;
+  background-size: contain;
+}
+
+.project-name {
+  text-shadow: 1px 1px 6px rgba(68, 68, 68, 0.87);
+}
+
+.project-tagline {
+  text-shadow: 1px 1px 6px rgba(68, 68, 68, 0.87);
 }
