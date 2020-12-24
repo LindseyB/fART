@@ -6,7 +6,7 @@
     .image-gallery li a img {width: 100%; display: block;}
 </style>
 
-{% assign files_by_modified_date = site.static_files | sort: "modified_time" | reverse %}
+{% assign files_by_modified_date = site.static_files | sort: modified_time | reverse %}
 
 <ul class="image-gallery">
     {% for file in files_by_modified_date %}
