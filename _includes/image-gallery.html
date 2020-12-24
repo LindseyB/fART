@@ -6,10 +6,8 @@
     .image-gallery li a img {width: 100%; display: block;}
 </style>
 
-{% assign files_by_modified_date = site.static_files | sort: modified_time | reverse %}
-
 <ul class="image-gallery">
-    {% for file in files_by_modified_date %}
+    {% for file in site.static_files %}
         {% if file.path contains include.folder %}
             {% if file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.JPG' or file.extname == '.JPEG' %}
             {% assign filenameparts = file.path | split: "/" %}
