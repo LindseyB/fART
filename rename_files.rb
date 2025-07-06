@@ -1,3 +1,5 @@
+# Example usage: ruby .\rename_files.rb scans
+
 #!/usr/bin/env ruby
 
 require 'pry'
