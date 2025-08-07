@@ -1,23 +1,211 @@
 <style>
-    .image-gallery {overflow: auto; margin-left: -1%!important;}
-    .image-gallery li {float: left; display: block; margin: 0 0 1% 1%; width: 19%;}
-    .image-gallery li a {text-align: center; text-decoration: none!important; color: #777;}
-    .image-gallery li a span {display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; padding: 3px 0;}
-    .image-gallery li a img {width: 100%; display: block;}
+    .art-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+        padding: 2rem 0;
+        list-style: none;
+        margin: 0;
+    }
+
+    .art-gallery-item {
+        position: relative;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateY(0);
+    }
+
+    .art-gallery-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .art-gallery-link {
+        display: block;
+        text-decoration: none !important;
+        color: inherit;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .art-gallery-image-container {
+        position: relative;
+        aspect-ratio: 1;
+        overflow: hidden;
+        background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+    }
+
+    .art-gallery-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+        display: block;
+    }
+
+    .art-gallery-item:hover .art-gallery-image {
+        transform: scale(1.05);
+    }
+
+    .art-gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        padding: 2rem 1.5rem 1.5rem;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        color: white;
+    }
+
+    .art-gallery-item:hover .art-gallery-overlay {
+        transform: translateY(0);
+    }
+
+    .art-gallery-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0;
+        text-transform: capitalize;
+        letter-spacing: 0.025em;
+    }
+
+    .art-gallery-number {
+        font-size: 0.875rem;
+        opacity: 0.8;
+        margin-top: 0.25rem;
+    }
+
+    .gallery-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .gallery-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0 0 1rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .gallery-subtitle {
+        font-size: 1.125rem;
+        color: #666;
+        margin: 0;
+        font-weight: 300;
+    }
+
+    .gallery-stats {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        padding: 0.75rem 1.5rem;
+        background: rgba(102, 126, 234, 0.1);
+        border-radius: 50px;
+        font-size: 0.875rem;
+        color: #667eea;
+        font-weight: 500;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .art-gallery {
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+        }
+        
+        .gallery-title {
+            font-size: 2rem;
+        }
+        
+        .art-gallery-overlay {
+            padding: 1.5rem 1rem 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .art-gallery {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .gallery-title {
+            font-size: 1.75rem;
+        }
+    }
+
+    /* Loading animation */
+    .art-gallery-image {
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Focus states for accessibility */
+    .art-gallery-link:focus {
+        outline: 2px solid #667eea;
+        outline-offset: 2px;
+    }
 </style>
 
-<ul class="image-gallery">
+<div class="gallery-header">
+    <h1 class="gallery-title">Art Collection</h1>
+    <p class="gallery-subtitle">A curated selection of digital artwork</p>
+    {% assign image_count = 0 %}
+    {% assign image_files = "" | split: "," %}
     {% for file in site.static_files %}
         {% if file.path contains include.folder %}
             {% if file.extname == '.png' or file.extname == '.PNG' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.JPG' or file.extname == '.JPEG' %}
-            {% assign filenameparts = file.path | split: "/" %}
-            {% assign filename = filenameparts | last | replace: file.extname,"" %}
-            <li>
-                <a href="{{ file.path | relative_url }}" title="{{ filename }}" target="_blank">
-                    <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | relative_url }}&w=300&h=300&output=jpg&q=50&t=square" alt="{{ filename }}" title="{{ filename }}" />
-                </a>
-            </li>
+                {% assign image_files = image_files | push: file %}
             {% endif %}
         {% endif %}
+    {% endfor %}
+    {% assign sorted_images = image_files | sort: 'path' %}
+    
+    <div class="gallery-stats">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21,17H7V3A1,1 0 0,0 6,2H4A1,1 0 0,0 3,3V17A4,4 0 0,0 7,21H21A1,1 0 0,0 22,20V18A1,1 0 0,0 21,17M5,17V4H6V17A2,2 0 0,1 5,17M21,19H7A2,2 0 0,1 7,17H21V19Z"/>
+        </svg>
+        {{ sorted_images | size }} artworks
+    </div>
+</div>
+
+<ul class="art-gallery">
+    {% for file in sorted_images %}
+        {% assign filenameparts = file.path | split: "/" %}
+        {% assign filename = filenameparts | last | replace: file.extname,"" %}
+        {% assign parts = filename | split: "-" %}
+        {% assign number = parts[0] %}
+        {% assign title_parts = parts | slice: 1, parts.size %}
+        {% assign title = title_parts | join: " " | replace: "_", " " %}
+        
+        <li class="art-gallery-item">
+            <a href="{{ file.path | relative_url }}" title="{{ title | default: filename }}" target="_blank" class="art-gallery-link">
+                <div class="art-gallery-image-container">
+                    <img src="{{ file.path | relative_url }}" 
+                         alt="{{ title | default: filename }}" 
+                         class="art-gallery-image"
+                         loading="lazy" />
+                </div>
+                <div class="art-gallery-overlay">
+                    <h3 class="art-gallery-title">{{ title | default: "Untitled" }}</h3>
+                    <div class="art-gallery-number">#{{ number }}</div>
+                </div>
+            </a>
+        </li>
     {% endfor %}
 </ul>
