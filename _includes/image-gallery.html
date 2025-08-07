@@ -67,17 +67,20 @@
     }
 
     .art-gallery-title {
-        font-size: 1rem;
-        font-weight: 600;
+        font-size: 0.9rem;
+        font-weight: 500;
         margin: 0;
-        text-transform: capitalize;
-        letter-spacing: 0.025em;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-family: 'JetBrains Mono', monospace;
     }
 
     .art-gallery-number {
-        font-size: 0.875rem;
+        font-size: 0.8rem;
         opacity: 0.8;
         margin-top: 0.25rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 400;
     }
 
     .gallery-header {
@@ -86,20 +89,24 @@
     }
 
     .gallery-title {
-        font-size: 2.5rem;
-        font-weight: 700;
+        font-size: 2.2rem;
+        font-weight: 600;
         margin: 0 0 1rem;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        font-family: 'JetBrains Mono', monospace;
+        letter-spacing: -0.02em;
     }
 
     .gallery-subtitle {
-        font-size: 1.125rem;
+        font-size: 1rem;
         color: #666;
         margin: 0;
         font-weight: 300;
+        font-family: 'JetBrains Mono', monospace;
+        letter-spacing: 0.01em;
     }
 
     .gallery-stats {
@@ -110,9 +117,11 @@
         padding: 0.75rem 1.5rem;
         background: rgba(102, 126, 234, 0.1);
         border-radius: 50px;
-        font-size: 0.875rem;
+        font-size: 0.8rem;
         color: #667eea;
         font-weight: 500;
+        font-family: 'JetBrains Mono', monospace;
+        letter-spacing: 0.025em;
     }
 
     /* Responsive design */
@@ -124,11 +133,19 @@
         }
         
         .gallery-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
         
         .art-gallery-overlay {
             padding: 1.5rem 1rem 1rem;
+        }
+
+        .art-gallery-title {
+            font-size: 0.8rem;
+        }
+
+        .art-gallery-number {
+            font-size: 0.75rem;
         }
     }
 
@@ -139,7 +156,15 @@
         }
         
         .gallery-title {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
+        }
+
+        .gallery-subtitle {
+            font-size: 0.9rem;
+        }
+
+        .gallery-stats {
+            font-size: 0.75rem;
         }
     }
 
