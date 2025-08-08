@@ -1,1 +1,47 @@
 theme: jekyll-theme-cayman
+title: "fART"
+description: "A curated collection of digital artwork and illustrations"
+url: "https://lindseyb.github.io"
+baseurl: "/fART"
+
+# Local development settings
+# When running locally, these will be overridden
+local_url: "http://localhost:4001"
+local_baseurl: ""
+
+# SEO and social metadata
+author:
+  name: "LindseyB"
+  
+# Site settings
+lang: en
+timezone: America/New_York
+
+# Plugin configuration
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Performance optimizations
+sass:
+  style: compressed
+  sourcemap: never
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Exclude files from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - README.md
+  - rename_files.rb
