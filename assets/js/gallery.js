@@ -30,10 +30,10 @@ class ArtGalleryLightbox {
   attachEventListeners() {
     const lightbox = document.getElementById('art-lightbox');
     const galleryLinks = document.querySelectorAll('.art-gallery-link');
-    
+
     // Convert gallery links to array for navigation
     this.galleryItems = Array.from(galleryLinks);
-    
+
     // Add click listeners to gallery items
     galleryLinks.forEach((link, index) => {
       link.addEventListener('click', (e) => {
@@ -45,7 +45,7 @@ class ArtGalleryLightbox {
     // Close lightbox event listeners
     lightbox.querySelector('.art-lightbox-close').addEventListener('click', () => this.closeLightbox());
     lightbox.querySelector('.art-lightbox-overlay').addEventListener('click', () => this.closeLightbox());
-    
+
     // Navigation event listeners
     lightbox.querySelector('.art-lightbox-prev').addEventListener('click', () => this.navigateImage(-1));
     lightbox.querySelector('.art-lightbox-next').addEventListener('click', () => this.navigateImage(1));
@@ -53,7 +53,7 @@ class ArtGalleryLightbox {
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
       if (!lightbox.style.display || lightbox.style.display === 'none') return;
-      
+
       switch(e.key) {
         case 'Escape':
           this.closeLightbox();
@@ -71,11 +71,11 @@ class ArtGalleryLightbox {
   openLightbox(index) {
     this.currentIndex = index;
     const lightbox = document.getElementById('art-lightbox');
-    
+
     this.updateLightboxContent();
     lightbox.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-    
+
     // Focus management for accessibility
     setTimeout(() => {
       lightbox.querySelector('.art-lightbox-close').focus();
@@ -90,36 +90,36 @@ class ArtGalleryLightbox {
 
   navigateImage(direction) {
     this.currentIndex += direction;
-    
+
     if (this.currentIndex < 0) {
       this.currentIndex = this.galleryItems.length - 1;
     } else if (this.currentIndex >= this.galleryItems.length) {
       this.currentIndex = 0;
     }
-    
+
     this.updateLightboxContent();
   }
 
   updateLightboxContent() {
     const currentItem = this.galleryItems[this.currentIndex];
     const lightbox = document.getElementById('art-lightbox');
-    
+
     const img = currentItem.querySelector('.art-gallery-image');
     const title = currentItem.querySelector('.art-gallery-title');
     const number = currentItem.querySelector('.art-gallery-number');
     const fullSizeUrl = currentItem.href;
-    
+
     // Update lightbox content
-    lightbox.querySelector('.art-lightbox-image').src = img.src.replace('&w=400&h=400', '&w=800&h=800&q=90');
+    lightbox.querySelector('.art-lightbox-image').src = img.src.replace('&w=500&h=500', '&w=800&h=800');
     lightbox.querySelector('.art-lightbox-image').alt = img.alt;
     lightbox.querySelector('.art-lightbox-title').textContent = title.textContent;
     lightbox.querySelector('.art-lightbox-number').textContent = number.textContent;
     lightbox.querySelector('.art-lightbox-download').href = fullSizeUrl;
-    
+
     // Update navigation button states
     const prevBtn = lightbox.querySelector('.art-lightbox-prev');
     const nextBtn = lightbox.querySelector('.art-lightbox-next');
-    
+
     prevBtn.style.opacity = this.galleryItems.length > 1 ? '1' : '0.5';
     nextBtn.style.opacity = this.galleryItems.length > 1 ? '1' : '0.5';
     prevBtn.disabled = this.galleryItems.length <= 1;
@@ -164,9 +164,8 @@ const lightboxCSS = `
 
 .art-lightbox-container {
   position: relative;
-  max-width: 80vw;
+  max-width: 90vw;
   max-height: 90vh;
-  margin: 0 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -183,6 +182,7 @@ const lightboxCSS = `
   width: 100%;
   max-height: 90vh;
   overflow: hidden;
+  padding: 0 4rem;
 }
 
 .art-lightbox-image {
@@ -281,40 +281,43 @@ const lightboxCSS = `
 }
 
 .art-lightbox-prev {
-  left: -4rem;
+  left: 1rem;
 }
 
 .art-lightbox-next {
-  right: -4rem;
+  right: 1rem;
 }
 
 @media (max-width: 768px) {
   .art-lightbox-container {
-    max-width: 90vw;
+    max-width: 95vw;
     max-height: 95vh;
-    margin: 0 2rem;
   }
-  
+
+  .art-lightbox-content {
+    padding: 0 3rem;
+  }
+
   .art-lightbox-image {
     max-height: 60vh;
   }
-  
+
   .art-lightbox-info {
     padding: 1rem;
   }
-  
+
   .art-lightbox-nav {
     width: 40px;
     height: 40px;
     font-size: 1.25rem;
   }
-  
+
   .art-lightbox-prev {
-    left: -2.5rem;
+    left: 0.5rem;
   }
-  
+
   .art-lightbox-next {
-    right: -2.5rem;
+    right: 0.5rem;
   }
 }
 

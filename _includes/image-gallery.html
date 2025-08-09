@@ -131,11 +131,11 @@
             gap: 1.5rem;
             padding: 1.5rem 0;
         }
-        
+
         .gallery-title {
             font-size: 1.8rem;
         }
-        
+
         .art-gallery-overlay {
             padding: 1.5rem 1rem 1rem;
         }
@@ -154,7 +154,7 @@
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 1rem;
         }
-        
+
         .gallery-title {
             font-size: 1.5rem;
         }
@@ -200,7 +200,7 @@
         {% endif %}
     {% endfor %}
     {% assign sorted_images = image_files | sort: 'path' %}
-    
+
     <div class="gallery-stats">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
             <path d="M21,17H7V3A1,1 0 0,0 6,2H4A1,1 0 0,0 3,3V17A4,4 0 0,0 7,21H21A1,1 0 0,0 22,20V18A1,1 0 0,0 21,17M5,17V4H6V17A2,2 0 0,1 5,17M21,19H7A2,2 0 0,1 7,17H21V19Z"/>
