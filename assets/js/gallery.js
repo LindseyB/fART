@@ -164,8 +164,9 @@ const lightboxCSS = `
 
 .art-lightbox-container {
   position: relative;
-  max-width: 90vw;
+  max-width: 80vw;
   max-height: 90vh;
+  margin: 0 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -280,17 +281,18 @@ const lightboxCSS = `
 }
 
 .art-lightbox-prev {
-  left: 1rem;
+  left: -4rem;
 }
 
 .art-lightbox-next {
-  right: 1rem;
+  right: -4rem;
 }
 
 @media (max-width: 768px) {
   .art-lightbox-container {
-    max-width: 95vw;
+    max-width: 90vw;
     max-height: 95vh;
+    margin: 0 2rem;
   }
   
   .art-lightbox-image {
@@ -308,11 +310,11 @@ const lightboxCSS = `
   }
   
   .art-lightbox-prev {
-    left: 0.5rem;
+    left: -2.5rem;
   }
   
   .art-lightbox-next {
-    right: 0.5rem;
+    right: -2.5rem;
   }
 }
 
