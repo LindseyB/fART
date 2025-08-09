@@ -217,12 +217,12 @@
         {% assign number = parts[0] %}
         {% assign title_parts = parts | slice: 1, parts.size %}
         {% assign title = title_parts | join: " " | replace: "_", " " %}
-        
+
         <li class="art-gallery-item">
             <a href="{{ file.path | relative_url }}" title="{{ title | default: filename }}" target="_blank" class="art-gallery-link">
                 <div class="art-gallery-image-container">
-                    <img src="{{ file.path | relative_url }}" 
-                         alt="{{ title | default: filename }}" 
+                    <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | relative_url }}&w=500&h=500&output=jpg"
+                         alt="{{ title | default: filename }}"
                          class="art-gallery-image"
                          loading="lazy" />
                 </div>
