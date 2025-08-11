@@ -16,6 +16,7 @@ To add a new image and sort them:
 ```bash
 git add filename.png # needs to be added to git for date information
 ruby rename_files.rb scans
+git add -A && git commit # add and commit all the changed files so all the renames get commited
 ```
 
 ## License
