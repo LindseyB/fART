@@ -11,6 +11,13 @@ bundle install
 bundle exec jekyll serve
 ```
 
+To add a new image and sort them:
+
+```bash
+git add filename.png # needs to be added to git for date information
+ruby rename_files.rb scans
+```
+
 ## License
 
 Artwork © LindseyB. All rights reserved.
