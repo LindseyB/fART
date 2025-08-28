@@ -44,6 +44,7 @@
         <meta property="og:image:alt" content="Digital Artwork Collection">
     {% endif %}
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{% if newest_image %}{{ site.url }}{{ site.baseurl }}{{ newest_image.path }}{% else %}{{ site.url }}{{ site.baseurl }}/images/default-og-image.png{% endif %}">
 
     <!-- Performance optimizations -->
     <meta name="theme-color" content="#667eea">
