@@ -136,15 +136,15 @@ body {
     padding: 2rem 1rem;
     border-radius: 0;
   }
-  
+
   .page-header {
     padding: 3rem 0;
   }
-  
+
   .project-name {
     font-size: 2rem;
   }
-  
+
   .project-tagline {
     font-size: 1rem;
   }
@@ -154,7 +154,7 @@ body {
   .main-content {
     padding: 1.5rem 1rem;
   }
-  
+
   .page-header {
     padding: 2rem 0;
   }
@@ -184,5 +184,430 @@ html {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* === ART GALLERY STYLES === */
+.art-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+  list-style: none;
+  margin: 0;
+}
+
+.art-gallery-item {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+}
+
+.art-gallery-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.art-gallery-link {
+  display: block;
+  text-decoration: none !important;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.art-gallery-image-container {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+}
+
+.art-gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.art-gallery-item:hover .art-gallery-image {
+  transform: scale(1.05);
+}
+
+.art-gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 2rem 1.5rem 1.5rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  color: white;
+}
+
+.art-gallery-item:hover .art-gallery-overlay {
+  transform: translateY(0);
+}
+
+.art-gallery-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.art-gallery-number {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-top: 0.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+}
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.gallery-title {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.02em;
+}
+
+.gallery-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+  font-weight: 300;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.01em;
+}
+
+.gallery-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 50px;
+  font-size: 0.8rem;
+  color: #667eea;
+  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.025em;
+}
+
+/* Focus states for accessibility */
+.art-gallery-link:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* === ART LIGHTBOX STYLES === */
+.art-lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.art-lightbox-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.art-lightbox-container {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.art-lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  padding: 0 4rem;
+}
+
+.art-lightbox-image {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+}
+
+.art-lightbox-info {
+  padding: 1.5rem;
+  text-align: center;
+  width: 100%;
+  background: white;
+}
+
+.art-lightbox-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.art-lightbox-number {
+  margin: 0 0 1rem;
+  color: #718096;
+  font-size: 0.875rem;
+}
+
+.art-lightbox-download {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #667eea;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.art-lightbox-download:hover {
+  background: #5a67d8;
+}
+
+.art-lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.3s ease;
+}
+
+.art-lightbox-close:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.art-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.art-lightbox-nav:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.art-lightbox-nav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.art-lightbox-prev {
+  left: 1rem;
+}
+
+.art-lightbox-next {
+  right: 1rem;
+}
+
+/* === PAGE ENHANCEMENT STYLES === */
+.fade-in {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.site-footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.875rem;
+  color: var(--text-light);
+  text-align: center;
+}
+
+.site-footer-owner {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.site-footer a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+#skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  z-index: 999;
+  color: white;
+  background: #667eea;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: top 0.3s;
+}
+
+#skip-to-content:focus {
+  top: 6px;
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+  .art-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+  }
+
+  .gallery-title {
+    font-size: 1.8rem;
+  }
+
+  .art-gallery-overlay {
+    padding: 1.5rem 1rem 1rem;
+  }
+
+  .art-gallery-title {
+    font-size: 0.8rem;
+  }
+
+  .art-gallery-number {
+    font-size: 0.75rem;
+  }
+
+  .art-lightbox-container {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+
+  .art-lightbox-content {
+    padding: 0 3rem;
+  }
+
+  .art-lightbox-image {
+    max-height: 60vh;
+  }
+
+  .art-lightbox-info {
+    padding: 1rem;
+  }
+
+  .art-lightbox-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+
+  .art-lightbox-prev {
+    left: 0.5rem;
+  }
+
+  .art-lightbox-next {
+    right: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .art-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .gallery-title {
+    font-size: 1.5rem;
+  }
+
+  .gallery-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .gallery-stats {
+    font-size: 0.75rem;
   }
 }
