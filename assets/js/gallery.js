@@ -111,6 +111,7 @@ class ArtGalleryLightbox {
 
     // Update lightbox content
     lightbox.querySelector('.art-lightbox-image').src = img.src.replace('&w=300&h=300', '&w=800&h=800');
+    lightbox.querySelector('.art-lightbox-image').src = img.src.replace('t=square', '');
     lightbox.querySelector('.art-lightbox-image').alt = img.alt;
     lightbox.querySelector('.art-lightbox-title').textContent = title.textContent;
     lightbox.querySelector('.art-lightbox-number').textContent = number.textContent;
