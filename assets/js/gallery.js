@@ -110,7 +110,7 @@ class ArtGalleryLightbox {
     const fullSizeUrl = currentItem.href;
 
     // Update lightbox content
-    const new_src = img.src.replace('&t=square', '');
+    let new_src = img.src.replace('&t=square', '');
     new_src = new_src.replace('&q=50', '');
     lightbox.querySelector('.art-lightbox-image').src = new_src.replace('&w=300&h=300', '&w=800&h=800');
     lightbox.querySelector('.art-lightbox-image').alt = img.alt;
