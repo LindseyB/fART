@@ -33,9 +33,10 @@
         {% endif %}
     {% endfor %}
     {% if newest_image %}
+        {% assign image_dims = site.data.image_dimensions[newest_image.name] %}
         <meta property="og:image" content="{{ site.url }}{{ site.baseurl }}{{ newest_image.path }}">
-        <meta property="og:image:width" content="1200">
-        <meta property="og:image:height" content="1200">
+        <meta property="og:image:width" content="{{ image_dims.width | default: 1200 }}">
+        <meta property="og:image:height" content="{{ image_dims.height | default: 1200 }}">
         <meta property="og:image:alt" content="Latest artwork: {{ newest_image.name | replace: newest_image.extname, '' | replace: '-', ' ' | replace: '_', ' ' | capitalize }}">
         <meta property="og:image:type" content="image/{{ newest_image.extname | remove: '.' }}">
     {% else %}
